@@ -89,13 +89,13 @@ def recv_sock(addr):
     sk.bind(addr)
     output = ''
     flowIdList = {}
-
-    while True:
-        data,addr = sk.recvfrom(1500)
-        length = len(data)
-        #print length
-        flowId,seq,reliable,lastFrag = extractHeader(data[0:2])
-
+    while Timer Start:
+        while True:
+            data,addr = sk.recvfrom(1500)
+            length = len(data)
+            #print length
+            flowId,seq,reliable,lastFrag = extractHeader(data[0:2])
+            return ackthread
         # In order delivery
         if flowIdList.has_key((addr,flowId)):
             flowIdList[(addr,flowId)][seq] = data[2:length]
