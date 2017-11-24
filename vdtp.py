@@ -48,6 +48,7 @@ def fragmentData(serialData,reliable):
     return retBuf
 
 def ackthread(fragDataList,sk):
+    ack=0
     return 0
 
 def send(data,addr,reliable=0):
@@ -83,19 +84,23 @@ def extractHeader(hdr):
     return flowId,int(seq),reliable,lastFrag
 
 def recv_sock(addr):
-
+    import time
+    Timer_Start= time.time()
+    ack=ack+1
     sk = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     ackSk = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     sk.bind(addr)
     output = ''
     flowIdList = {}
-
-    while True:
-        data,addr = sk.recvfrom(1500)
-        length = len(data)
-        #print length
-        flowId,seq,reliable,lastFrag = extractHeader(data[0:2])
-
+    while Timer_Start:
+        while True:
+            data,addr = sk.recvfrom(1500)
+            length = len(data)
+            #print length
+            flowId,seq,reliable,lastFrag = extractHeader(data[0:2])
+            while seq=seq+ack
+                if timer=Timer Start+250:
+                    return ackthread
         # In order delivery
         if flowIdList.has_key((addr,flowId)):
             flowIdList[(addr,flowId)][seq] = data[2:length]
